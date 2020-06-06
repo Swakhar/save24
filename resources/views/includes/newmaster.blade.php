@@ -85,15 +85,15 @@
                                 @foreach($menus as $menu)
                                     <li class="full-width-columns">
                                         <a href="{{url('/category')}}/{{$menu->slug}}">{{$menu->name}}</a>
-                                        @if(\App\Category::where('mainid',$menu->id)->where('role','sub')->count() >0)
+                                        @if(\App\Category::where('mainid',$menu->id)->where('role','sub')->where('sub_menu_status','1')->count() >0)
                                             <i class="fa fa-chevron-down"></i>
                                             <div class="submenu">
-                                                @foreach(\App\Category::where('mainid',$menu->id)->where('role','sub')->get() as $submenu)
+                                                @foreach(\App\Category::where('mainid',$menu->id)->where('role','sub')->where('sub_menu_status','1')->get() as $submenu)
                                                     <div class="product-column-entry">
                                                         <div class="submenu-list-title"><a href="{{url('/category')}}/{{$submenu->slug}}">{{$submenu->name}}</a><span class="toggle-list-button"></span></div>
                                                         <div class="description toggle-list-container">
                                                             <ul class="list-type-1">
-                                                                @foreach(\App\Category::where('subid',$submenu->id)->where('role','child')->get() as $childmenu)
+                                                                @foreach(\App\Category::where('subid',$submenu->id)->where('role','child')->where('child_menu_status','1')->get() as $childmenu)
                                                                     <li><a href="{{url('/category')}}/{{$childmenu->slug}}"><i class="fa fa-angle-right"></i>{{$childmenu->name}}</a></li>
                                                                 @endforeach
                                                             </ul>
