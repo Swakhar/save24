@@ -65,6 +65,16 @@ class CategoryController extends Controller
                 $file->move('assets/images/categories',$photo_name);
                 $category['feature_image'] = $photo_name;
             }
+            if($request->status==""){
+                $category->status=0;
+            }else{
+                $category->status=1;
+            }
+            if($request->menu_status==""){
+                $category->menu_status=0;
+            }else{
+                $category->menu_status=1;
+            }
         $category->save();
         Session::flash('message', 'New Category Added Successfully.');
         return redirect('admin/categories');
@@ -122,6 +132,7 @@ class CategoryController extends Controller
             }else{
                 $input['featured'] = 0;
             }
+
         $category->update($input);
         Session::flash('message', 'Category Updated Successfully.');
         return redirect('admin/categories');
@@ -166,5 +177,20 @@ class CategoryController extends Controller
 
         Session::flash('message', 'Category Deleted Successfully.');
         return redirect('admin/categories');
+    }
+    public function changeMainCategoryStatus(Request $request)
+    {
+        $req_name=$request->name;
+        if($req_name=='status'){
+            $category = Category::findOrFail($request->id);
+            $category->status=$request->status;
+        }
+        else if($req_name=='menu_status'){
+            $category = Category::findOrFail($request->id);
+            $category->menu_status=$request->status;
+        }
+        $category->save();
+  
+        return response()->json(['success'=>'Status change successfully.']);
     }
 }

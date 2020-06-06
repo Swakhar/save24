@@ -64,6 +64,16 @@ class ChildCategoryController extends Controller
                 $file->move('assets/images/categories',$photo_name);
                 $category['feature_image'] = $photo_name;
             }
+            if($request->status==""){
+                $category->child_status=0;
+            }else{
+                $category->child_status=1;
+            }
+            if($request->menu_status==""){
+                $category->child_menu_status=0;
+            }else{
+                $category->child_menu_status=1;
+            }
             $category->save();
             Session::flash('message', 'New Child Category Added Successfully.');
             return redirect('admin/categories');
@@ -147,5 +157,20 @@ class ChildCategoryController extends Controller
         $category->delete();
         Session::flash('message', 'Child Category Deleted Successfully.');
         return redirect('admin/categories');
+    }
+    public function changeChildCategoryStatus(Request $request)
+    {
+        $req_name=$request->name;
+        if($req_name=='child_status'){
+            $category = Category::findOrFail($request->id);
+            $category->child_status=$request->status;
+        }
+        else if($req_name=='child_menu_status'){
+            $category = Category::findOrFail($request->id);
+            $category->child_menu_status=$request->status;
+        }
+        $category->save();
+  
+        return response()->json(['success'=>'Status change successfully.']);
     }
 }

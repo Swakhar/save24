@@ -18,7 +18,7 @@
     <link href="{{ URL::asset('assets/css/bootstrap-tagsinput.css')}}" rel="stylesheet">
     <link href="//cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/bootstrap-colorpicker.css')}}" rel="stylesheet">
-
+    <script src="{{ URL::asset('assets/js/jquery.min.js')}}"></script>
     <!-- Custom CSS -->
     <link href="{{ URL::asset('assets/css/genius-admin.css')}}" rel="stylesheet">
 
