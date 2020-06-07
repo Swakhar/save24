@@ -95,6 +95,9 @@
                 <a href="{!! url('admin/categories') !!}"><i class="fa fa-fw fa-sitemap"></i> Manage Category</a>
             </li>
             <li>
+                <a href="{!! url('admin/miscellaneous') !!}"><i class="fa fa-fw fa-industry"></i> Miscellaneous</a>
+            </li>
+            <li>
                 <a href="{!! url('admin/blog') !!}"><i class="fa fa-fw fa-file-text"></i> Blog</a>
             </li>
             <li>

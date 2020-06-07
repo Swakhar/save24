@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Miscellaneous;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -35,7 +36,9 @@ class SubCategoryController extends Controller
     public function create()
     {
         $categories = Category::where('role','main')->get();
-        return view('admin.subcategoryadd',compact('categories'));
+        $inds = Miscellaneous::where('role','industry')->get();
+        $inst = Miscellaneous::where('role','institution')->get();
+        return view('admin.subcategoryadd',compact('categories','inds','inst'));
     }
 
     /**
@@ -51,32 +54,40 @@ class SubCategoryController extends Controller
         ]);
 
         if ($validator->passes()) {
-        $category = new Category;
-        $category->fill($request->all());
-        $category['role'] = "sub";
-            if ($request->featured == 1){
-                $category->featured = 1;
-            }else{
-                $category->featured = 0;
-            }
-            if ($file = $request->file('fimage')){
-                $photo_name = time().$request->file('fimage')->getClientOriginalName();
-                $file->move('assets/images/categories',$photo_name);
-                $category['feature_image'] = $photo_name;
-            }
-            if($request->status==""){
-                $category->sub_status=0;
-            }else{
-                $category->sub_status=1;
-            }
-            if($request->menu_status==""){
-                $category->sub_menu_status=0;
-            }else{
-                $category->sub_menu_status=1;
-            }
-        $category->save();
-        Session::flash('message', 'New Sub Category Added Successfully.');
-        return redirect('admin/categories');
+          
+            $ind_ids=$request->input('ind_id');
+            $ind_ids=implode(',',$ind_ids);
+            $ins_ids=$request->input('ins_id');
+            $ins_ids=implode(',',$ins_ids);
+
+            $category = new Category;
+            $category->fill($request->all());
+            $category['role'] = "sub";
+                if ($request->featured == 1){
+                    $category->featured = 1;
+                }else{
+                    $category->featured = 0;
+                }
+                if ($file = $request->file('fimage')){
+                    $photo_name = time().$request->file('fimage')->getClientOriginalName();
+                    $file->move('assets/images/categories',$photo_name);
+                    $category['feature_image'] = $photo_name;
+                }
+                if($request->status==""){
+                    $category->sub_status=0;
+                }else{
+                    $category->sub_status=1;
+                }
+                if($request->menu_status==""){
+                    $category->sub_menu_status=0;
+                }else{
+                    $category->sub_menu_status=1;
+                }
+            $category->ind_id=$ind_ids;
+            $category->ins_id=$ins_ids;
+            $category->save();
+            Session::flash('message', 'New Sub Category Added Successfully.');
+            return redirect('admin/categories');
         }
         return redirect()->back()->with('message', 'Category Slug Must Be Unique.');
     }
@@ -108,7 +119,9 @@ class SubCategoryController extends Controller
     {
         $categories = Category::where('role','main')->get();
         $category = Category::findOrFail($id);
-        return view('admin.subcategoryedit',compact('category','categories'));
+        $inds = Miscellaneous::where('role','industry')->get();
+        $inst = Miscellaneous::where('role','institution')->get();
+        return view('admin.subcategoryedit',compact('category','categories','inds','inst'));
     }
 
     /**
@@ -125,6 +138,10 @@ class SubCategoryController extends Controller
         ]);
 
         if ($validator->passes()) {
+            $ind_ids=$request->input('ind_id');
+            $ind_ids=implode(',',$ind_ids);
+            $ins_ids=$request->input('ins_id');
+            $ins_ids=implode(',',$ins_ids);
         $category = Category::findOrFail($id);
         $input = $request->all();
 
@@ -138,6 +155,8 @@ class SubCategoryController extends Controller
             }else{
                 $input['featured'] = 0;
             }
+            $category->ind_id=$ind_ids;
+            $category->ins_id=$ins_ids;
         $category->update($input);
         Session::flash('message', 'Sub Category Updated Successfully.');
         return redirect('admin/categories');
@@ -157,20 +176,5 @@ class SubCategoryController extends Controller
         $category->delete();
         Session::flash('message', 'Sub Category Deleted Successfully.');
         return redirect('admin/categories');
-    }
-    public function changeSubCategoryStatus(Request $request)
-    {
-        $req_name=$request->name;
-        if($req_name=='sub_status'){
-            $category = Category::findOrFail($request->id);
-            $category->sub_status=$request->status;
-        }
-        else if($req_name=='sub_menu_status'){
-            $category = Category::findOrFail($request->id);
-            $category->sub_menu_status=$request->status;
-        }
-        $category->save();
-  
-        return response()->json(['success'=>'Status change successfully.']);
     }
 }
