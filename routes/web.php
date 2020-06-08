@@ -133,6 +133,7 @@ Route::resource('/admin/testimonial', 'TestimonialController');
 // Route::resource('/admin/services', 'ServiceController');
 Route::get('/admin/categories/delete/{id}', 'CategoryController@delete');
 Route::resource('/admin/categories', 'CategoryController');
+Route::resource('/admin/attributes', 'AttributeController');
 
 Route::get('/subcats/{id}', 'SubCategoryController@subcats');
 Route::get('/childcats/{id}', 'ChildCategoryController@childcats');
