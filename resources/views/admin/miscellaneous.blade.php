@@ -24,8 +24,7 @@
                         <!-- /.start -->
                         <div class="col-md-12">
                             <ul class="nav nav-tabs tabs-left">
-                                <li class="active"><a href="#industry" data-toggle="tab" aria-expanded="false"><strong>Industries</strong></a></li>
-                                <li><a href="#institution" data-toggle="tab" aria-expanded="true"><strong>Institutions</strong></a></li>
+                                <li class="active"><a href="#industry" data-toggle="tab" aria-expanded="false"><strong>Related Industries/Insttutions</strong></a></li>
                             </ul>
                         </div>
 
@@ -35,9 +34,9 @@
                                 <div class="tab-pane active" id="industry">
                                     <div class="go-title">
                                         <div class="pull-right">
-                                            <a href="{!! url('admin/miscellaneous/create') !!}" class="btn btn-primary btn-add"><i class="fa fa-plus"></i> Add Industry</a>
+                                            <a href="{!! url('admin/miscellaneous/create') !!}" class="btn btn-primary btn-add"><i class="fa fa-plus"></i> Add Industry/Institution</a>
                                         </div>
-                                        <h3>Industry</h3>
+                                        <h3>Industry/Institution</h3>
                                         <div class="go-line"></div>
                                     </div>
                                     <!-- Page Content -->
@@ -46,8 +45,8 @@
                                             <table class="table table-striped table-bordered" cellspacing="0" id="example" width="100%">
                                                 <thead>
                                                 <tr>
-                                                    <th>Industry Id</th>
-                                                    <th>Industry Name</th>
+                                                    <th> Id</th>
+                                                    <th> Name</th>
                                                     <th>Actions</th>
                                                 </tr>
                                                 </thead>
@@ -60,43 +59,6 @@
                                                         <td>
                                                             <a href="miscellaneous/{{$ind->id}}/edit" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit </a>
                                                             <a href="javascript:;" data-href="{{url('/')}}/admin/miscellaneous/delete/{{$ind->id}}" data-toggle="modal" data-target="#confirm-delete"class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Remove</a><br>
-
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tab-pane" id="institution">
-                                    <div class="go-title">
-                                        <div class="pull-right">
-                                            <a href="{!! url('admin/institutions/create') !!}" class="btn btn-primary btn-add"><i class="fa fa-plus"></i> Add Institution</a>
-                                        </div>
-                                        <h3>Institution</h3>
-                                        <div class="go-line"></div>
-                                    </div>
-                                    <!-- Page Content -->
-                                    <div class="panel panel-default">
-                                        <div class="panel-body">
-                                            <table class="table table-striped table-bordered" cellspacing="0" id="example2" width="100%">
-                                                <thead>
-                                                <tr>
-                                                    <th>Institution Id</th>
-                                                    <th>Institution Name</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($ins as $in)
-                                                    <tr>
-                                                        <td>{{$in->name}}
-                                                        </td>
-                                                        <td>{{$in->ins_id}}</td>
-                                                        <td>
-                                                            <a href="institutions/{{$in->id}}/edit" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit </a>
-                                                            <a href="javascript:;" data-href="{{url('/')}}/admin/institutions/delete/{{$in->id}}" data-toggle="modal" data-target="#confirm-delete"class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Remove</a><br>
 
                                                         </td>
                                                     </tr>

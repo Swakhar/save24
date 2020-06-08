@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Miscellaneous;
+use App\RelatedIndustry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -21,9 +21,8 @@ class MiscellaneousController extends Controller
 
     public function index()
     {
-        $inds = Miscellaneous::where('role','industry')->get();
-        $ins = Miscellaneous::where('role','institution')->get();
-        return view('admin.miscellaneous',compact('inds','ins'));
+        $inds = RelatedIndustry::orderBy('name','desc')->get();
+        return view('admin.miscellaneous',compact('inds'));
     }
 
     /**
@@ -45,21 +44,19 @@ class MiscellaneousController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'name' => 'required|max:255|unique:miscellaneous',
+            'name' => 'required|max:255|unique:related_industry',
         ]);
 
         if ($validator->passes()) {
             $ind_id=strtolower($request->name);
-            $miscellaneous = new Miscellaneous;
-            $miscellaneous->fill($request->all());
-            $miscellaneous['ind_id'] = $ind_id;
-            $miscellaneous['role'] = "industry";
-            
-        $miscellaneous->save();
+            $industries = new RelatedIndustry;
+            $industries->fill($request->all());
+            $industries['ind_id'] = $ind_id;            
+        $industries->save();
         Session::flash('message', 'New Industry Added Successfully.');
         return redirect('admin/miscellaneous');
         }
-        return redirect()->back()->with('message', 'Industry Name Must Be Unique.');
+        return redirect()->back()->with('message', 'Industry/Insttution Name Must Be Unique.');
     }
 
     /**
@@ -81,8 +78,8 @@ class MiscellaneousController extends Controller
      */
     public function edit($id)
     {
-        $miscellaneous = Miscellaneous::findOrFail($id);
-        return view('admin.industryedit',compact('miscellaneous'));
+        $industries = RelatedIndustry::findOrFail($id);
+        return view('admin.industryedit',compact('industries'));
     }
 
     /**
@@ -95,16 +92,16 @@ class MiscellaneousController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(),[
-            'name' => 'required|max:255|unique:miscellaneous',
+            'name' => 'required|max:255|unique:related_industry',
         ]);
 
         if ($validator->passes()) {
             $ind_id=strtolower($request->name);
-            $miscellaneous = Miscellaneous::findOrFail($id);      
-            $miscellaneous->name=$request->name;
-            $miscellaneous->ind_id=$ind_id;
-            $miscellaneous->save();
-            Session::flash('message', 'Industry Updated Successfully.');
+            $industries = RelatedIndustry::findOrFail($id);      
+            $industries->name=$request->name;
+            $industries->ind_id=$ind_id;
+            $industries->save();
+            Session::flash('message', 'Industry/Institution Updated Successfully.');
             return redirect('admin/miscellaneous');
         }
         return redirect()->back()->with('message', 'Industry Name Must Be Unique.');
@@ -113,10 +110,10 @@ class MiscellaneousController extends Controller
     
     public function delete($id)
     {
-        $miscellaneous = Miscellaneous::findOrFail($id);
-        $miscellaneous->delete();
+        $industries = RelatedIndustry::findOrFail($id);
+        $industries->delete();
 
-        Session::flash('message', 'Industry Deleted Successfully.');
+        Session::flash('message', 'Industry/Institution Deleted Successfully.');
         return redirect('admin/miscellaneous');
     }
 }

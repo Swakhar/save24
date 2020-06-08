@@ -27,7 +27,7 @@
                         <form method="POST" action="{!! action('MiscellaneousController@store') !!}" class="form-horizontal form-label-left" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Industry Display Name<span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Industry/Institution Display Name<span class="required">*</span>
                                     <p class="small-label">(In Any Language)</p>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -38,7 +38,7 @@
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <button type="submit" class="btn btn-success btn-block">Add Industry</button>
+                                    <button type="submit" class="btn btn-success btn-block">Add Industry/Institution</button>
                                 </div>
                             </div>
                         </form>

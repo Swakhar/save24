@@ -29,7 +29,6 @@ class CreateCategoriesTable extends Migration
             $table->integer('sub_menu_status')->nullable();
             $table->integer('child_menu_status')->nullable();
             $table->string('ind_id')->nullable();
-            $table->string('ins_id')->nullable();
             $table->timestamps();
         });
     }

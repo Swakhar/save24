@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Miscellaneous;
+use App\RelatedIndustry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -36,9 +36,8 @@ class SubCategoryController extends Controller
     public function create()
     {
         $categories = Category::where('role','main')->get();
-        $inds = Miscellaneous::where('role','industry')->get();
-        $inst = Miscellaneous::where('role','institution')->get();
-        return view('admin.subcategoryadd',compact('categories','inds','inst'));
+        $inds = RelatedIndustry::orderBy('name','desc')->get();
+        return view('admin.subcategoryadd',compact('categories','inds'));
     }
 
     /**
@@ -57,8 +56,6 @@ class SubCategoryController extends Controller
           
             $ind_ids=$request->input('ind_id');
             $ind_ids=implode(',',$ind_ids);
-            $ins_ids=$request->input('ins_id');
-            $ins_ids=implode(',',$ins_ids);
 
             $category = new Category;
             $category->fill($request->all());
@@ -84,7 +81,7 @@ class SubCategoryController extends Controller
                     $category->sub_menu_status=1;
                 }
             $category->ind_id=$ind_ids;
-            $category->ins_id=$ins_ids;
+
             $category->save();
             Session::flash('message', 'New Sub Category Added Successfully.');
             return redirect('admin/categories');
@@ -119,9 +116,8 @@ class SubCategoryController extends Controller
     {
         $categories = Category::where('role','main')->get();
         $category = Category::findOrFail($id);
-        $inds = Miscellaneous::where('role','industry')->get();
-        $inst = Miscellaneous::where('role','institution')->get();
-        return view('admin.subcategoryedit',compact('category','categories','inds','inst'));
+        $inds = RelatedIndustry::orderBy('name','desc')->get();
+        return view('admin.subcategoryedit',compact('category','categories','inds'));
     }
 
     /**
@@ -140,8 +136,6 @@ class SubCategoryController extends Controller
         if ($validator->passes()) {
             $ind_ids=$request->input('ind_id');
             $ind_ids=implode(',',$ind_ids);
-            $ins_ids=$request->input('ins_id');
-            $ins_ids=implode(',',$ins_ids);
         $category = Category::findOrFail($id);
         $input = $request->all();
 
@@ -156,7 +150,6 @@ class SubCategoryController extends Controller
                 $input['featured'] = 0;
             }
             $category->ind_id=$ind_ids;
-            $category->ins_id=$ins_ids;
         $category->update($input);
         Session::flash('message', 'Sub Category Updated Successfully.');
         return redirect('admin/categories');

@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Related Industry<span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Related Industry/Institution<span class="required">*</span>
                                     <p class="small-label">(Multiple selecton allowed)</p>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
@@ -80,27 +80,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Related Institution<span class="required">*</span>
-                                    <p class="small-label">(Multiple selecton allowed)</p>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select class="form-control" name="ins_id[]" multiple required>
-                                        
-                                        @if($category->ins_id)
-                                            @foreach(explode(',',$category->ins_id) as $ins)
-                                                <option value="{{$ins}}" selected>{{$ins}}</option>
-                                            @endforeach
-                                        @endif
-                                        @if($inst)
-                                            @foreach($inst as $ins)
-                                                <option value="{{$ins->ins_id}}">{{$ins->ind_id}}</option>
-                                            @endforeach
-                                        @endif
-                                        <option value="">None</option>
-                                    </select>
-                                </div>
-                            </div>
+                            
                             @if($category->featured != 0)
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
@@ -142,7 +122,7 @@
                                         <p class="small-label">Must Be a Square Sized Image(400x400)</p>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="file" accept="image/*" name="fimage" required/>
+                                        <input type="file" accept="image/*" name="fimage" />
                                     </div>
                                 </div>
                             @endif

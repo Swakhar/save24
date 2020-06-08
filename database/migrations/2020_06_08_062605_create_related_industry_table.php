@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMiscellaneousTable extends Migration
+class CreateRelatedIndustryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateMiscellaneousTable extends Migration
      */
     public function up()
     {
-        Schema::create('miscellaneous', function (Blueprint $table) {
+        Schema::create('related_industry', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->string('ind_id')->nullable();
-            $table->string('ins_id')->nullable();
-            $table->string('role');
+            $table->string('ind_id');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateMiscellaneousTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('miscellaneous');
+        Schema::dropIfExists('related_industry');
     }
 }
