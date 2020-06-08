@@ -22,6 +22,10 @@
                                     {{ Session::get('message') }}
                                 </div>
                             @endif
+
+                            @if ($errors->any())
+                                <ul>{!! implode('', $errors->all('<li style="color:red">:message</li>')) !!}</ul>
+                            @endif
                         </div>
                         <table class="table table-striped table-bordered" cellspacing="0" id="example" width="100%">
                             <thead>

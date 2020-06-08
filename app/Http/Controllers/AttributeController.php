@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Attribute;
-use Illuminate\Http\Request;
+use App\Http\Requests\AttributeRequest;
+// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -40,24 +41,14 @@ class AttributeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AttributeRequest $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name' => 'required|max:255|unique:attributes',
-            'code' => 'required|max:255|unique:attributes',
-        ]);
-
-        if ($validator->passes()) {
-            $attribute = new Attribute;
-            $attribute->fill($request->all());
-            $attribute['name'] = $request->name;
-            $attribute['code'] = strtolower($request->code);
-
+          $attribute = new Attribute;
+          $attribute->fill($request->all());
+          $attribute['name'] = $request->name;
           $attribute->save();
           Session::flash('message', 'New Attribute Added Successfully.');
           return redirect('admin/attributes');
-        }
-        return redirect()->back()->with('message', 'Attribute Name Must Be Unique.');
     }
 
     /**
@@ -90,22 +81,14 @@ class AttributeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AttributeRequest $request, $id)
     {
-        $validator = Validator::make($request->all(),[
-            'name' => 'required|max:255|unique:attribute',
-            'code' => 'required|max:255|unique:attributes',
-        ]);
-
-        if ($validator->passes()) {
-            $attribute = Attribute::findOrFail($id);
-            $attribute['name'] = $request->name;
-            $attribute['code'] = strtolower($request->code);
-            $attribute->save();
-            Session::flash('message', 'Attribute Updated Successfully.');
-            return redirect('admin/attributes');
-        }
-        return redirect()->back()->with('message', 'Attribute Name Must Be Unique.');
+        $attribute = Attribute::findOrFail($id);
+        $attribute['name'] = $request->name;
+        $attribute['code'] = strtolower(strtolower(str_replace(' ', '_', $request->name)));
+        $attribute->save();
+        Session::flash('message', 'Attribute Updated Successfully.');
+        return redirect('admin/attributes');
     }
 
 

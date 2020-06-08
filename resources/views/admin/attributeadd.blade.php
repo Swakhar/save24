@@ -21,6 +21,9 @@
                                 {{ Session::get('message') }}
                             </div>
                         @endif
+                        @if ($errors->any())
+                            <ul>{!! implode('', $errors->all('<li style="color:red">:message</li>')) !!}</ul>
+                        @endif
                         <div id="response"></div>
                         <form method="POST" action="{!! action('AttributeController@store') !!}" class="form-horizontal form-label-left" enctype="multipart/form-data">
                             {{csrf_field()}}
@@ -29,16 +32,7 @@
                                     <p class="small-label">(In Any Language)</p>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="name" class="form-control col-md-7 col-xs-12" name="name" placeholder="e.g Example Attribute" required="required" type="text">
-                                </div>
-                            </div>
-
-                            <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">Attribute Code<span class="required">*</span>
-                                    <p class="small-label">(In Any Language)</p>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="name" class="form-control col-md-7 col-xs-12" name="code" placeholder="e.g Example Attribute Code" required="required" type="text">
+                                    <input id="name" class="form-control col-md-7 col-xs-12" name="name" placeholder="e.g Example Attribute" type="text" required="required">
                                 </div>
                             </div>
 

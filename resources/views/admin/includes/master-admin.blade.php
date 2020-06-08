@@ -83,6 +83,10 @@
             </li>
 
             <li>
+                <a href="{!! url('admin/attributes') !!}"><i class="fa fa-fw fa-shopping-cart"></i> Attributes</a>
+            </li>
+
+            <li>
                 <a href="{!! url('admin/withdraws') !!}"><i class="fa fa-fw fa-bank"></i> Withdraws</a>
             </li>
             <li>
@@ -189,4 +193,3 @@
 @yield('footer')
 </body>
 </html>
-
