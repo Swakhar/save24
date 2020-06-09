@@ -59,6 +59,28 @@
                                     <input id="slug" class="form-control col-md-7 col-xs-12" name="slug" value="{{$category->slug}}" placeholder="e.g sports" required="required" type="text">
                                 </div>
                             </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Related Industry/Institution<span class="required">*</span>
+                                    <p class="small-label">(Multiple selecton allowed)</p>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="ind_id[]" multiple required>
+
+                                        @if($category->ind_id)
+                                            @foreach(explode(',',$category->ind_id) as $ind)
+                                                <option value="{{$ind}}" selected>{{$ind}}</option>
+                                            @endforeach
+                                        @endif
+                                        @if($inds)
+                                            @foreach($inds as $ind)
+                                                <option value="{{$ind->ind_id}}">{{$ind->ind_id}}</option>
+                                            @endforeach
+                                        @endif
+                                        <option value="">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
                             @if($category->featured != 0)
                                 <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
@@ -100,10 +122,11 @@
                                         <p class="small-label">Must Be a Square Sized Image(400x400)</p>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="file" accept="image/*" name="fimage" required/>
+                                        <input type="file" accept="image/*" name="fimage" />
                                     </div>
                                 </div>
                             @endif
+
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">

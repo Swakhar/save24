@@ -55,6 +55,22 @@
                                     <input id="slug" class="form-control col-md-7 col-xs-12" name="slug" placeholder="e.g mens-clothing" required="required" type="text">
                                 </div>
                             </div>
+                           <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Related Industry/Institution<span class="required">*</span>
+                                    <p class="small-label">(Multiple selecton allowed)</p>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="ind_id[]" multiple required>
+                                        <option value="">None</option>
+                                        @if($inds)
+                                            @foreach($inds as $ind)
+                                                <option value="{{$ind->ind_id}}">{{$ind->name}}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            
                             <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
                                     </label>

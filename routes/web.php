@@ -143,6 +143,12 @@ Route::get('/childcats/{id}', 'ChildCategoryController@childcats');
 Route::resource('/admin/subcategory', 'SubCategoryController');
 Route::resource('/admin/childcategory', 'ChildCategoryController');
 
+Route::resource('/admin/miscellaneous', 'MiscellaneousController');
+Route::resource('/admin/institutions', 'InstitutionController');
+Route::get('/admin/miscellaneous/delete/{id}', 'MiscellaneousController@delete');
+Route::get('/admin/institutions/delete/{id}', 'InstitutionController@delete');
+
+
 Route::get('admin/brand/add', 'PageSettingsController@addbrand');
 Route::get('admin/brand/{id}/delete', 'PageSettingsController@branddelete');
 Route::get('admin/brand/{id}/edit', 'PageSettingsController@brandedit');
