@@ -66,21 +66,33 @@
                                 </div>
                             </div>
                             <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="featured" id="atofea" value="1"><strong>Add to Featured</strong></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group" id="fimg" style="display: none;">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Add Featured Image<span class="required">*</span>
+                                        <p class="small-label">Must Be a Square Sized Image(400x400)</p>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="file" accept="image/*" name="fimage" />
+                                    </div>
+                                </div>
+                            <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" name="featured" id="atofea" value="1"><strong>Add to Featured</strong></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="checkbox" data-toggle="toggle" data-on="Enabled" name="status" value="enable" data-off="Disabled" checked><strong>Enable Category</strong>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="item form-group" id="fimg" style="display: none;">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Add Featured Image<span class="required">*</span>
-                                    <p class="small-label">Must Be a Square Sized Image(400x400)</p>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="file" accept="image/*" name="fimage" required/>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="checkbox" data-toggle="toggle" data-on="Enabled" name="menu_status" value="enable" data-off="Disabled" checked><strong>Add to Menu</strong>
+                                    </div>
                                 </div>
                             </div>
                             <div class="ln_solid"></div>

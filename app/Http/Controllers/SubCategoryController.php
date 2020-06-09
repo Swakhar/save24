@@ -64,6 +64,16 @@ class SubCategoryController extends Controller
                 $file->move('assets/images/categories',$photo_name);
                 $category['feature_image'] = $photo_name;
             }
+            if($request->status==""){
+                $category->sub_status=0;
+            }else{
+                $category->sub_status=1;
+            }
+            if($request->menu_status==""){
+                $category->sub_menu_status=0;
+            }else{
+                $category->sub_menu_status=1;
+            }
         $category->save();
         Session::flash('message', 'New Sub Category Added Successfully.');
         return redirect('admin/categories');
@@ -147,5 +157,20 @@ class SubCategoryController extends Controller
         $category->delete();
         Session::flash('message', 'Sub Category Deleted Successfully.');
         return redirect('admin/categories');
+    }
+    public function changeSubCategoryStatus(Request $request)
+    {
+        $req_name=$request->name;
+        if($req_name=='sub_status'){
+            $category = Category::findOrFail($request->id);
+            $category->sub_status=$request->status;
+        }
+        else if($req_name=='sub_menu_status'){
+            $category = Category::findOrFail($request->id);
+            $category->sub_menu_status=$request->status;
+        }
+        $category->save();
+  
+        return response()->json(['success'=>'Status change successfully.']);
     }
 }

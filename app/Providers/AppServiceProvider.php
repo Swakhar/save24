@@ -24,7 +24,8 @@ class AppServiceProvider extends ServiceProvider
             $settings->with('sociallinks', DB::select('select * from social_links where id=?',[1]));
             $settings->with('lblogs', DB::select('select * from blogs LIMIT 4'));
             $settings->with('sliders', DB::select('select * from sliders'));
-            $settings->with('menus', DB::select('select * from categories where role=?',['main']));
+            //$settings->with('menus', DB::select('select * from categories where role=?',['main']));
+            $settings->with('menus', DB::select('select * from categories where role="main" and menu_status="1"'));
             $settings->with('code', DB::select('select * from code_scripts'));
             $settings->with('ads728x90', Advertisement::inRandomOrder()
                 ->where('banner_size','728x90')->where('status',1)->first());

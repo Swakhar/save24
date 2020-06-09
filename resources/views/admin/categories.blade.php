@@ -49,7 +49,9 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Category Name</th>
-                                                    <th width="20%">Url Slug</th>
+                                                    <th >Url Slug</th>
+                                                    <th >Active/Deactive</th>
+                                                    <th >Menu option</th>
                                                     <th>Actions</th>
                                                 </tr>
                                                 </thead>
@@ -62,6 +64,20 @@
                                                         @endif
                                                         </td>
                                                         <td>{{$category->slug}}</td>
+                                                        <td>
+                                                            @if($category->status == 1)
+                                                                <input type="checkbox" data-id="{{$category->id}}" class="toggle-class_main" data-toggle="toggle" data-on="Enabled" name="status" value="enable" data-off="Disabled" checked>
+                                                            @else
+                                                                <input type="checkbox" data-id="{{$category->id}}" class="toggle-class_main" data-toggle="toggle" data-on="Enabled" name="status" value="enable" data-off="Disabled">
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if($category->menu_status == 1)
+                                                                <input type="checkbox" data-id="{{$category->id}}" class="toggle-class_main" data-toggle="toggle" data-on="Enabled" name="menu_status" value="enable" data-off="Disabled" checked>
+                                                            @else
+                                                                <input type="checkbox" data-id="{{$category->id}}" class="toggle-class_main" data-toggle="toggle" data-on="Enabled" name="menu_status" value="enable" data-off="Disabled">
+                                                            @endif
+                                                        </td>
                                                         <td>
                                                             <a href="categories/{{$category->id}}/edit" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit </a>
                                                             <a href="javascript:;" data-href="{{url('/')}}/admin/categories/delete/{{$category->id}}" data-toggle="modal" data-target="#confirm-delete"class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Remove</a><br>
@@ -90,7 +106,9 @@
                                                 <tr>
                                                     <th>Category Name</th>
                                                     <th>Main Category</th>
-                                                    <th width="20%">Url Slug</th>
+                                                    <th>Url Slug</th>
+                                                    <th >Active/Deactive</th>
+                                                    <th >Menu option</th>
                                                     <th>Actions</th>
                                                 </tr>
                                                 </thead>
@@ -104,6 +122,20 @@
                                                         </td>
                                                         <td>{{$sub->mainid->name}}</td>
                                                         <td>{{$sub->slug}}</td>
+                                                        <td>
+                                                            @if($sub->sub_status == 1)
+                                                                <input type="checkbox" data-id="{{$sub->id}}" class="toggle-class_Sub" data-toggle="toggle" data-on="Enabled" name="sub_status" value="enable" data-off="Disabled" checked>
+                                                            @else
+                                                                <input type="checkbox" data-id="{{$sub->id}}" class="toggle-class_Sub" data-toggle="toggle" data-on="Enabled" name="sub_status" value="enable" data-off="Disabled">
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if($sub->sub_menu_status == 1)
+                                                                <input type="checkbox" data-id="{{$sub->id}}" class="toggle-class_Sub" data-toggle="toggle" data-on="Enabled" name="sub_menu_status" value="enable" data-off="Disabled" checked>
+                                                            @else
+                                                                <input type="checkbox" data-id="{{$sub->id}}" class="toggle-class_Sub" data-toggle="toggle" data-on="Enabled" name="sub_menu_status" value="enable" data-off="Disabled">
+                                                            @endif
+                                                        </td>
                                                         <td>
                                                             <a href="subcategory/{{$sub->id}}/edit" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit </a>
                                                             <a href="javascript:;" data-href="{{url('/')}}/admin/categories/delete/{{$sub->id}}" data-toggle="modal" data-target="#confirm-delete"class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Remove</a><br>
@@ -133,7 +165,9 @@
                                                     <th>Category Name</th>
                                                     <th>Main Category</th>
                                                     <th>Sub Category</th>
-                                                    <th width="20%">Url Slug</th>
+                                                    <th >Url Slug</th>
+                                                    <th >Active/Deactive</th>
+                                                    <th >Menu option</th>
                                                     <th>Actions</th>
                                                 </tr>
                                                 </thead>
@@ -148,6 +182,20 @@
                                                         <td>{{$data->mainid->name}}</td>
                                                         <td>{{$data->subid->name}}</td>
                                                         <td>{{$data->slug}}</td>
+                                                        <td>
+                                                            @if($data->child_status == 1)
+                                                                <input type="checkbox" data-id="{{$data->id}}" class="toggle-class_child" data-toggle="toggle" data-on="Enabled" name="child_status" value="enable" data-off="Disabled" checked>
+                                                            @else
+                                                                <input type="checkbox" data-id="{{$data->id}}" class="toggle-class_child" data-toggle="toggle" data-on="Enabled" name="child_status" value="enable" data-off="Disabled">
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            @if($data->child_menu_status == 1)
+                                                                <input type="checkbox" data-id="{{$data->id}}" class="toggle-class_child" data-toggle="toggle" data-on="Enabled" name="child_menu_status" value="enable" data-off="Disabled" checked>
+                                                            @else
+                                                                <input type="checkbox" data-id="{{$data->id}}" class="toggle-class_child" data-toggle="toggle" data-on="Enabled" name="child_menu_status" value="enable" data-off="Disabled">
+                                                            @endif
+                                                        </td>
                                                         <td>
 
                                                             <a href="childcategory/{{$data->id}}/edit" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit </a>
@@ -195,6 +243,7 @@
             </div>
         </div>
     </div>
+    <script src="{{ URL::asset('assets/js/status_change_ajax.js')}}"></script>
 
 @stop
 

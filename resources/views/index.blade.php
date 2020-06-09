@@ -81,43 +81,46 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row featured-list">
-                        <div class="featured-categories-wrapper">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="single-featured-area">
-                                    <a href="{{url('/category')}}/{{$fcategory->slug}}">
-                                        <img class="featured-img" src="{{url('/assets')}}/images/categories/{{$fcategory->feature_image}}" alt="">
-                                        <div class="product-feature-content">
-                                            <h3>{{$fcategory->name}}</h3>
-                                            @if(\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcategory->id])->count()>1)
-                                                <p>{{\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcategory->id])->count()}} products</p>
-                                            @else
-                                                <p>{{\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcategory->id])->count()}} product</p>
-                                            @endif
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            @foreach($fcategories as $fcat)
-                            <div class="col-md-3 col-sm-6">
-                                <div class="single-featured-area">
-                                    <a href="{{url('/category')}}/{{$fcat->slug}}">
-                                        <img class="featured-img" src="{{url('/assets')}}/images/categories/{{$fcat->feature_image}}" alt="">
-                                        <div class="product-feature-content">
-                                            <h3>{{$fcat->name}}</h3>
-                                            @if(\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcat->id])->count()>1)
-                                                <p>{{\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcat->id])->count()}} products</p>
-                                            @else
-                                                <p>{{\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcat->id])->count()}} product</p>
-                                            @endif
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            @endforeach
+                    @if($fcategory)
+                        <div class="row featured-list">
+                            <div class="featured-categories-wrapper">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="single-featured-area">
 
+                                        <a href="{{url('/category')}}/{{$fcategory->slug}}">
+                                            <img class="featured-img" src="{{url('/assets')}}/images/categories/{{$fcategory->feature_image}}" alt="">
+                                            <div class="product-feature-content">
+                                                <h3>{{$fcategory->name}}</h3>
+                                                @if(\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcategory->id])->count()>1)
+                                                    <p>{{\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcategory->id])->count()}} products</p>
+                                                @else
+                                                    <p>{{\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcategory->id])->count()}} product</p>
+                                                @endif
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                @foreach($fcategories as $fcat)
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="single-featured-area">
+                                        <a href="{{url('/category')}}/{{$fcat->slug}}">
+                                            <img class="featured-img" src="{{url('/assets')}}/images/categories/{{$fcat->feature_image}}" alt="">
+                                            <div class="product-feature-content">
+                                                <h3>{{$fcat->name}}</h3>
+                                                @if(\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcat->id])->count()>1)
+                                                    <p>{{\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcat->id])->count()}} products</p>
+                                                @else
+                                                    <p>{{\App\Product::where('status','1')->whereRaw('FIND_IN_SET(?,category)', [$fcat->id])->count()}} product</p>
+                                                @endif
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                @endforeach
+
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>
